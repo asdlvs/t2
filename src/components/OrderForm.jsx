@@ -27,13 +27,12 @@ const OrderForm = () => {
 
     const [order, setOrder] = useState(initialValue);
     const [searchName, setSearchName] = useState("");
-    const [services, setServices] = useState([]);
     const dispatch = useDispatch();
 
     const customers = useSelector(state => state.customers);
     const selectedOrder = useSelector(state => state.orders.selectedOrder);
     const loadedServices = useSelector(state => state.services.services);
-    // const auth = useSelector(state => state.auth);
+    
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -42,21 +41,8 @@ const OrderForm = () => {
             dispatch(getOrder(id));
         }
         dispatch(retrieveServices());
-    }, [id]);
+    }, [id, dispatch]);
 
-    // useEffect(() => {
-    //     const c = customers.currentCustomer;
-    //     if (c.id > 0) {
-    //         setOrder({
-    //             ...order,
-    //             customerId: c.id,
-    //             customerName: c.name,
-    //             phoneNumber: c.phoneNumber,
-    //             email: c.email
-    //         });
-    //     }
-
-    // }, [customers.currentCustomer, order]);
 
     useEffect(() => {
         setOrder({
@@ -64,10 +50,6 @@ const OrderForm = () => {
             ...selectedOrder
         });
     }, [selectedOrder, initialValue]);
-
-    useEffect(() => {
-        setServices(loadedServices);
-    }, [loadedServices]);
 
     const saveOrder = () => {
         const orderToCreate = {
@@ -205,7 +187,7 @@ const OrderForm = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {services && services.length > 0 ? services.map((service, index) => {
+                                {loadedServices && loadedServices.length > 0 ? loadedServices.map((service, index) => {
                                     const orderService = order.services.find(s => s.id === service.id);
                                     return (
                                         <tr key={index}>

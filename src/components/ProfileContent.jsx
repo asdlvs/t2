@@ -11,6 +11,7 @@ const ProfileContent = () => {
     const { instance, accounts } = useMsal();
     const dispatch = useDispatch();
 
+    // eslint-disable-next-line
     useEffect(() => {
         dispatch(requestAccessToken(accounts, instance));
     }, []);
