@@ -36,7 +36,7 @@ const OrdersList = () => {
                         <td>{order.email}</td>
                         <td>{order.fromAddress}</td>
                         <td>{order.toAddress}</td>
-                        <td></td>
+                        <td>{order.services.map(s => s.name).join(', ')}</td>
                         <td>{order.comment}</td>
                     </tr>
                 ))}
