@@ -11,9 +11,9 @@ const ProfileContent = () => {
     const { instance, accounts } = useMsal();
     const dispatch = useDispatch();
 
-    // eslint-disable-next-line
     useEffect(() => {
         dispatch(requestAccessToken(accounts, instance));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const name = accounts[0] && accounts[0].name;
